@@ -2,7 +2,6 @@ package main
 
 import (
 	"bncc/models"
-	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -68,15 +67,11 @@ func CreateMemory(c echo.Context) error {
 	image, err := c.FormFile("image")
 
 	if err != nil {
-		fmt.Println("71")
-		fmt.Println(err)
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
 	imageName, err := utils.HandleImage(image)
 	if err != nil {
-		fmt.Println("77")
-		fmt.Println(err)
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 
