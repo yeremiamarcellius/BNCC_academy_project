@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/labstack/echo/v4"
-	"github.com/youhane/bncc_academy_final/pkg/models"
-	"github.com/youhane/bncc_academy_final/pkg/utils"
+	"github.com/yeremiamarcellius/bncc_academy_project/models"
+	"github.com/yeremiamarcellius/bncc_academy_project/utils"
 )
 
 func main() {

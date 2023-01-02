@@ -1,7 +1,7 @@
 package models
 
 import (
-	"bncc/config"
+	"github.com/yeremiamarcellius/bncc_academy_project/config"
 
 	"github.com/jinzhu/gorm"
 )

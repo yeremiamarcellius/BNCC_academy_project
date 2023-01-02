@@ -1,4 +1,4 @@
-module github.com/youhane/bncc_academy_final
+module github.com/yeremiamarcellius/bncc_academy_project
 
 go 1.19
 

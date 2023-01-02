@@ -1,10 +1,11 @@
 package utils
 
 import (
-	"bncc/models"
 	"io"
 	"mime/multipart"
 	"os"
+
+	"github.com/yeremiamarcellius/bncc_academy_project/models"
 )
 
 func HandleImage(img *multipart.FileHeader) (string, error) {
