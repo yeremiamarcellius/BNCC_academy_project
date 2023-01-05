@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/yeremiamarcellius/bncc_academy_project/models"
 	"github.com/yeremiamarcellius/bncc_academy_project/utils"
 )
@@ -16,6 +17,8 @@ func main() {
 
 	// c := &controllers.MemoryController{}
 
+	e.Use(middleware.CORS())
+	e.Static("/", "public")
 	e.GET("/", GetMemories)
 	e.POST("/memory", CreateMemory)
 	e.GET("/memory/:id", GetMemory)
@@ -145,4 +148,20 @@ func Register(c echo.Context) error {
 	user.CreateUser()
 
 	return c.JSON(http.StatusOK, user)
+}
+
+func GetMemoriesByUserId(c echo.Context) error {
+	id := c.Param("id")
+	ID, err := strconv.ParseInt(id, 0, 0)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	user, err := models.GetUserById(ID)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, "User not found")
+	}
+
+	memories := models.GetAllMemoriesByUser(user)
+	return c.JSON(http.StatusOK, memories)
 }

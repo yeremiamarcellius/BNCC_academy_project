@@ -32,6 +32,12 @@ func GetUserByEmail(email string) (*User, error) {
 	return &user, db.Error
 }
 
+func GetUserById(id int64) (*User, error) {
+	var user User
+	db := db.Where("ID=?", id).Find(&user)
+	return &user, db.Error
+}
+
 func GenerateJWT(email string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"email": email,
@@ -43,4 +49,11 @@ func GenerateJWT(email string) (string, error) {
 		return "", err
 	}
 	return tokenString, nil
+}
+
+func GetAllMemoriesByUser(u *User) []Memory {
+	var memories []Memory
+	db.Model(&u).Related(&memories, "Memories").Preload("Tags").Preload("User")
+	db.Preload("Tags").Find(&memories)
+	return memories
 }
